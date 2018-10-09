@@ -30,7 +30,7 @@ function RenderDish({dish})
       };
 }
 
-function RenderComments({comments, postComment, dishId}) 
+function RenderComments({comments, addComment, dishId }) 
 {     
     return(
         <div className="mt-1">
@@ -43,7 +43,7 @@ function RenderComments({comments, postComment, dishId})
               </li>
             ))}
           </ul>
-          <CommentForm />
+          <CommentForm  dishId={dishId} addComment={addComment}/>
         </div>
       ); 
   }
@@ -57,7 +57,12 @@ function RenderComments({comments, postComment, dishId})
           }
 
           this.toggleModal = this.toggleModal.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
           
+          this.state ={
+              isNavOpen: false,
+              isModalOpen: false
+          }
     }
 
     toggleModal(){
@@ -67,8 +72,8 @@ function RenderComments({comments, postComment, dishId})
     }
 
     handleSubmit(values){
-      alert("Current State is: " + JSON.stringify(values));
-
+            this.toggleModal();
+            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render(){
@@ -91,7 +96,7 @@ function RenderComments({comments, postComment, dishId})
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="name">Your Name</Label>
-                                <Control.text model=".name" id="name" name="name" 
+                                <Control.text model=".author" id="name" name="name" 
                                     className="form-control" placeholder="Your Name"
                                     validators = {
                                         {
@@ -152,7 +157,8 @@ function RenderComments({comments, postComment, dishId})
             </div>
             <div className="col-12 col-md-5 m-1">
               <RenderComments comments ={props.comments}
-                />
+              addComment={props.addComment}
+              dishId={props.dish.id}/>
             </div>
           </div>
         </div>
