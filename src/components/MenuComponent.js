@@ -34,17 +34,17 @@ const Menu = (props) => {
                );
            }
        
-           else if(props.errMess){
+           else if(props.dishes.errMess){
                return(
                    <div className="container">
                       <div className="row">
-                          <h4>props.errMess</h4>
+                          <h4>props.dishes.errMess</h4>
                       </div>
                    </div>   
                   );
                }
-
-        return (
+        else
+            return (
             <div className="container">
             <div className="row">
                 <Breadcrumb>
