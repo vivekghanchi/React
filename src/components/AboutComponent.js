@@ -26,7 +26,7 @@ const RenderLeader = ({leader}) =>{
     );
 };
 
-const Leaders = ({leaders,leadersLoading,leadersErrMess}) =>{
+const Leaders = ({leaders, leadersLoading,  leadersErrMess}) =>{
     if (leadersLoading) {
         return(
             <Loading />
@@ -41,7 +41,7 @@ const Leaders = ({leaders,leadersLoading,leadersErrMess}) =>{
         return(
             <div>
                 <Stagger in> 
-                    {leaders.leaders.map((leader) => 
+                    {leaders.map((leader) => 
                         <Fade in>
                             <RenderLeader key={leader.id} leader={leader} />
                         </Fade>
